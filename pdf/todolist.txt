@@ -1,0 +1,13 @@
+***********************************************************************
+1 - Revoir la gestion des élections niveau Utilisateur pour que s'il y
+    a au moins deux élections de type différent, l'utilisateur effectue
+    la première élections puis la deuxième ainsi de suite.
+
+2 - Informer les utilisateurs de chaque élections et ou campagne pour les
+    nécessité aux votes.
+
+3 - Importation des images depuis un fichier Excel vers la base de données
+
+
+/*****************@copyright("SCORPION2024#07032002")*****************/
+***********************************************************************
