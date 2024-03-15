@@ -3,6 +3,11 @@
     a au moins deux élections de type différent, l'utilisateur effectue
     la première élections puis la deuxième ainsi de suite.
 
+    -------------------------------------------------------------------
+    Solut° : Créer une base de donnée : VoteDone
+    Pb     : Gestion des élections
+
+
 2 - Informer les utilisateurs de chaque élections et ou campagne pour les
     nécessité aux votes.
 

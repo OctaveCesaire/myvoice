@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_users');
             $table->unsignedBigInteger('id_election');
+            $table->integer('votedone')->unsigned()->default(0);
             $table->foreign('id_election')->references('id')->on('elections');
             $table->foreign('id_users')->references('id')->on('users');
 

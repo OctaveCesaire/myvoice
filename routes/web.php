@@ -25,6 +25,11 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::get('home',[AuthControllers::class,'home'])->name('home');
+
+    // Après Login, Sélectionner le type de candidat
+    Route::get('selection', [AuthControllers::class,'selecteCandidat'])->name('selection');
+
+    Route::post('selection', [AuthControllers::class,'affiche'])->name('affiche');
     // Route pour le vote
     Route::post('vote',[AuthControllers::class,'vote'])->name('vote');
 
