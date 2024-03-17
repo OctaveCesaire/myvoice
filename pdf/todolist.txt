@@ -13,6 +13,17 @@
 
 3 - Importation des images depuis un fichier Excel vers la base de données
 
+* 17-03-2024 Note du Jour
+        /******************************************************************
+         * ***************************NOTE********************************
+         * @ListeForElections : Lister les elections ou le candidats n'a pas encore voté
+         * pour éviter la fraude. Revoir aussi l'affichage de la barre de navigation
+         *
+         * @vote : Noter les elections auxquels le candidats à déjà voter jusqu'à leur accordé
+         * done s'il finit de voter à tous.
+         *
+         * @Importation et création de l'élection : S'assurer que l'importation fonctionne bien pour les candidats avant de créer l'élection.
+        *******************************************************************/
 
 /*****************@copyright("SCORPION2024#07032002")*****************/
 ***********************************************************************

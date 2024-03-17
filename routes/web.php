@@ -18,18 +18,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Main Page
 Route::get('/', function () {
     return view('welcome');
 });
 
+/************************************************************************
+ *                      Route About All Of Guest
+ *************************************************************************/
 Route::middleware(['auth'])->group(function () {
 
     Route::get('home',[AuthControllers::class,'home'])->name('home');
 
     // Après Login, Sélectionner le type de candidat
-    Route::get('selection', [AuthControllers::class,'selecteCandidat'])->name('selection');
+    Route::get('selection', [AuthControllers::class,'ListeForElections'])->name('selection');
 
+    // Page de redirection vers les candidats
     Route::post('selection', [AuthControllers::class,'affiche'])->name('affiche');
+
     // Route pour le vote
     Route::post('vote',[AuthControllers::class,'vote'])->name('vote');
 
