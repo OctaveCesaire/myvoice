@@ -15,6 +15,7 @@
                                 <form action="{{route('vote')}}" method="POST" role="form">
                                     @csrf
                                     <input type="hidden" name="vote_for" value="{{ $candidat->id }}">
+                                    <input type="hidden" name="election_id" value="{{ $candidat->election_id }}">
                                     <input type="submit" value="{{__('Vote')}} . {{$candidat->id}}" class="btn btn-outline-primary">
                                 </form>
                             </div>

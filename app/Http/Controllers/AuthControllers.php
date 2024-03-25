@@ -2,6 +2,7 @@
     namespace App\Http\Controllers;
 
     use App\Models\Candidats;
+    use App\Models\VoteDone;
     // use App\Models\Elections;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
@@ -26,8 +27,23 @@
             $election = DB::table('elections')->where('status','launching')
                                               ->where('pays',Auth::user()->pays)
                                               ->get();
+
+            $voteDones = DB::table('elections')->join('vote_dones','elections.id','=','vote_dones.id_election')
+                                               ->select('elections.*')->where('vote_dones.id_users','=',Auth::user()->id)
+                                               ->get();
+
             foreach ($election as $key => $value) {
-                $tab[$key] = $value->type;
+                $el = $value;
+                foreach ($voteDones as $k => $item) {
+                    if($item->id !== $el->id){
+                        $tab[$value->id] = $value->type;
+                    }
+                }
+            }
+            if($tab === []){
+                foreach ($election as $key => $value) {
+                    $tab[$key]= $value->type;
+                }
             }
             return view('layouts.selecteCandidat',compact('tab'));
         }
@@ -41,12 +57,12 @@
 
         function affiche(Request $request){
             $candidatAll = DB::table('candidats')->join('elections', 'candidats.election_id', '=', 'elections.id')
-                                                 ->select('candidats.id', 'candidats.fullName')
+                                                 ->select('candidats.id','candidats.fullName','candidats.election_id')
                                                  ->where('elections.status', 'launching')
                                                  ->where('elections.type',$request->Type_Election)
                                                  ->where('elections.pays',Auth::user()->pays)
                                                  ->get();
-
+            // dd($candidatAll);
             return view('home', compact('candidatAll'));
         }
 
@@ -80,6 +96,7 @@
         ***************************************************************************/
         public function vote(Request $request)
         {
+            // dd($request);
             // if($this->count_election >= 2){
             // }
             // else{
@@ -87,6 +104,12 @@
             $voice = Candidats::findOrFail($request->vote_for);
             $voice->nbreDeVoix += 1;
             $voice->update();
+            VoteDone::create([
+                'id_users'=>Auth::user()->id,
+                'id_election'=> $request->election_id,
+            ]);
+
+
 
 
             Auth::user()->statut = 'done';
@@ -99,10 +122,8 @@
             if ($this->count_election > 2) {
 
                 Auth::user()->statut == 'null';
-                return redirect()->back();
+                return redirect('selection');
             } else {
-                Auth::user()->statut = 'done';
-                Auth::user()->update();
                 return redirect('confirm');
             }
         }
